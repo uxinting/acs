@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Job</title>
+        
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="wysibb/css/wbbtheme.css" rel="stylesheet">
+        <style>
+            body {
+                padding: 20px 0;
+            }
+            
+            #job div pre {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+            
+            #code .tab-content {
+                padding: 0;
+            }
+            
+            #code .tab-pane {
+                height: 500px;
+                margin: 0;
+            }
+            
+            #src {
+                background: black;
+            }
+            
+            #linenumber {
+                height: 100%;
+                display: inline-block;
+                min-width: 30px;
+                width: 5%;
+                resize: none;
+                overflow: hidden;
+                border: none;
+                float: left;
+                background: inherit;
+                padding-right: 7px;
+                padding-top: 4px;
+                font-size: 14px;
+                text-shadow: -1px -1px 0px #000;
+                background: #383838;
+                color: #B0B0B0;
+                text-align: right;
+                font-family: Courier, Times New Roman;
+            }
+                        
+            #srccontent {
+                height: 100%;
+                display: inline-block;
+                width: 94%;
+            }
+            
+            #srccontent textarea {
+                width: 100%;
+                resize: none;
+            }
+            
+            .wysibb-toolbar {
+                display: none;
+            }
+            
+            .wysibb {
+                height: 100%;
+                border-width: 0 0 0 0px;
+                background: inherit;
+            }
+            
+            .wysibb-text {
+                height: 100%;
+            }
+            
+            .wysibb-text-editor {
+                height: 100%;
+                font-size: 14px;
+                color: #F0F0F0;
+                font-family: Courier, Times New Roman;
+                letter-spacing: 1px;
+            }
+            
+            .bottom-resize-line {
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="job" class="panel panel-default">
+                        <div class="panel-heading">普通骑士<span class="pull-right">#job1</span></div>
+                        <div class="panel-body">
+                            <h4>描述</h4>
+                            <p><pre>奶牛们已厌倦了各种各样的变化的n皇后问题，他们开始解决骑士(国际象棋中的马称为骑士，即KNIGHT)问题并需要你的帮助。
+
+一个骑士在棋盘上能够做一些特定的移动。比如：一个普通的骑士能够向下移动两步，向右移动1步(在所有的可能移动当中的一种)。这种移动被标记为[-2, 1]
+
+更加一般的，一个符号[a,b] 表示a步向上移动(当a<0时表示向下移动)，b步向右移动(b<0时表示向左移动)。
+
+扩展这个符号，一种一般的移动规则(i,j)表示8种移动方式[+i, +j], [+i, -j], [-i, +j], [-i, -j], [+j, +i], [+j,-i], [-j, +i], [-j, -i]。
+
+奶牛们有一个n*n的棋盘，他们想知道最少放上几个骑士就可以控制整个棋盘，一个骑士可以控制它一步可以到达的格子，但是不能控制它自己所在的格子。</pre></p>
+                            <h4>输入</h4>
+                            <p><pre>
+第一行：一个整数n(4<=n<=8)，表示棋盘的边长
+
+第二行：两个整数，i,j，(1 <= i,j <= N/2)，表示骑士的移动规则。</pre></p>
+                            <h4>输出</h4>
+                            <p><pre>
+一个整数，表示控制棋盘最少需要放置的骑士的数目</pre></p>
+                            <h4>样例输入</h4>
+                            <p><pre>6
+1 2</pre></p>
+                            <h4>样例输出</h4>
+                            <p><pre>8</pre></p>
+                        </div>
+                    </div>
+                    <div id="code" class="panel panel-default">
+                        <div class="panel-heading" role="tablist" aria-multiselectable="true">
+                            <div class="btn-group btn-group-sm">
+                                <a class="btn btn-default btn-sm" data-toggle="tab" role="tab" href="#src" aria-controls="src">Source Code</a>
+                                <a class="btn btn-default btn-sm" data-toggle="tab" role="tab" href="#compile" aria-controls="compile">Compile</a>
+                                <a class="btn btn-default btn-sm" data-toggle="tab" role="tab" href="#run" aria-controls="run">Run</a>
+                            </div>
+                        </div>
+                        <div class="panel-body tab-content">
+                            <div id="src" role="tabpanel" class="tab-pane fade in active">
+                                <textarea id="linenumber" readonly></textarea>
+                                <div id="srccontent"><textarea></textarea></div>
+                            </div>
+                            <div id="compile" role="tabpanel" class="tab-pane fade">
+                                <p class="bg-success">
+                                    编译成功
+                                </p>
+                            </div>
+                            <div id="run" role="tabpanel" class="tab-pane fade">
+                                <p>
+                                    运行成功
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary pull-right" type="button" >提交</button>
+                </div>
+            </div>
+        </div>
+        
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="wysibb/js/jquery.wysibb.min.js"></script>
+        <script src="dist/js/bootstrap.min.js"></script>
+        <script>
+            function LineNumber( lines ) {
+                var lss = $('#linenumber').val()
+                var ls = lss.split( '\n' );
+                var ml = ls.length <= 1 ? 0 : parseInt( ls[ls.length-2] );
+                if ( ml < lines ) {
+                    var linens = '';
+                    for ( var i = ml+1; i < lines+10; i++ ) {
+                        linens += i + '\n';
+                    }
+                    $('#linenumber').val( lss + linens );
+                }
+            }
+            
+            $(document).ready(function() {
+                $('#linenumber').val('');
+                LineNumber( 30 );
+                
+                var wbbOpt = {
+                    buttons: "bold,italic,underline,|,img,link,|,code,quote"
+                }
+                window.editor = $("#srccontent>textarea").wysibb(wbbOpt);
+                
+                $('.wysibb-text-editor').scroll( function (e) {
+                    LineNumber( $('.wysibb-text-editor br').length );
+                    $('#linenumber').scrollTop( $(e.target).scrollTop() );
+                } );
+                
+                $('button').click( function(e) {
+                    alert(window.editor.htmlcode());
+                } );
+            });
+        </script>
+    </body>
+</html>

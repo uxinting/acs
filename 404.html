@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>404</title>
+        <meta charset=utf-8>
+        <style>
+            body {
+                position: absolute;
+                font-family: Arial;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+            }
+            
+            div {
+                display: block;
+                position: absolute;
+                color: #666;
+                font-size: 400px;
+                text-align: center;
+                text-shadow: 1px 1px 2px #111;
+                top: -600px;
+                width: 100%;
+                transition: 0.3s;
+            }
+            
+            img {
+                position: fixed;
+                opacity: 0;
+                left: 200px;
+                top: 50px;
+                transition: 0.3s;
+            }
+            
+            p {
+                display: block;
+                text-align: center;
+                font-size: 0;
+                color: #888;
+                margin-top: 220px;
+                transition-property: all;
+                transition-delay: 0.2s;
+                transition-duration: 0.6s;
+            }
+            
+            p span {
+                position: absolute;
+                margin-left: -10%;
+                font-size: 135px;
+                transition-property: all;
+                transition-delay: 0.1s;
+                transition-duration: 0.4s;
+            }
+            
+            a {
+                position: fixed;
+                bottom: 100px;
+                left: 50px;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div>404</div>
+        <img src="img/404.png">
+        <p>Sorry <span>Page</span> Not Found </p>
+        <a href="javascript:history.go(-1)">&larr;Back</a>
+        
+        <script>
+            setTimeout( function() {
+                document.getElementsByTagName('div')[0].style.top = '0px';
+                document.getElementsByTagName('p')[0].style.marginTop = '410px';
+                document.getElementsByTagName('span')[0].style.fontSize = '0px';
+                document.getElementsByTagName('p')[0].style.fontSize = '30px';
+                document.getElementsByTagName('p')[0].style.color = '#B44';
+                document.getElementsByTagName('span')[0].style.position = 'relative';
+                document.getElementsByTagName('span')[0].style.marginLeft = 0;
+                document.getElementsByTagName('img')[0].style.opacity = 1;
+            }, 500 );
+        </script>
+    </body>
+</html>

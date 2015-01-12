@@ -1,0 +1,131 @@
+
+    <form role="form" class="col-md-7 col-md-offset-0" style="width: 95%">
+        <div class="form-group">
+            <label for="jobType">作业类型（其中章节编号和作业编号，请输入阿拉伯数字，若为考试，可不填写。如不填写，默认为0）</label>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" tabindex="-1" id="jobTypeCur">作业类型</button>
+                            <button type="button" class="btn btn-default
+                     dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                <span class="caret"></span>
+                                <span class="sr-only"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript: OnChangeJobSelect(0,'作业');">作业</a></li>
+                                <li><a href="javascript: OnChangeJobSelect(1,'考试');">考试</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" tabindex="-1" id="jobCourse">课程名称</button>
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                                <span class="caret"></span>
+                                <span class="sr-only"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript: OnChangeCourseSelect(1,'C程序设计');">C程序设计</a></li>
+                            </ul>
+                        </div>
+                        <span class="input-group-addon">章节编号</span>
+                        <input type="text" id="jobChapNo" class="form-control" placeholder="例如：12">
+                        <span class="input-group-addon">章内作业编号</span>
+                        <input type="text" id="jobAssNo" class="form-control" placeholder="例如：3">
+                    </div>
+                </div>
+        </div>
+        <div class="form-group" style="margin-top: 15px;">
+            <label for="jobTitle">作业标题</label>
+            <input type="text" class="form-control" id="jobTitle" placeholder="作业标题">
+        </div>
+        <div class="form-group">
+            <label for="jobProDesc">作业描述（如有输入和输出，请在此描述，本处接受HTML排版）</label>
+            <textarea type="text" class="form-control" style="height: 250px;" id="jobProDesc" placeholder="作业描述"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="jobAnsCode">标准答案源代码（将根据“输入样例”生成“输出样例”，根据“测试用例”生成“测试答案”）</label>
+            <textarea type="text" class="form-control" style="height: 250px;" id="jobAnsCode" placeholder="标准答案源代码"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="jobInSample">输入样例（提供学生参考。第一行用N表示一共有多少组测试样例）</label>
+            <textarea type="text" class="form-control" style="height: 150px;" id="jobInSample" placeholder="输入样例"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="jobInTest">测试用例（作为输入测试学生提交的代码的正确性。第一行用N表示一共有多少组测试样例）</label>
+            <textarea type="text" class="form-control" style="height: 300px;" id="jobInTest" placeholder="测试用例"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="startend" style="display: block;">起止时间（时间格式请参照 2014-01-01 12:00:00）</label>
+            <input type="text" class="form-control" id="jobTime_Start" placeholder="开始时间" style="display:inline-block; width:45%;">
+            <input type="text" class="form-control" id="jobTime_End" placeholder="结束时间" style="display:inline-block; width:45%;">
+        </div>
+        <div class="form-group">
+            <label for="jobNote">作业备注</label>
+            <textarea type="text" class="form-control" id="jobNote" placeholder="作业备注"></textarea>
+        </div>
+        <div id="result" style="margin: 8px 0; color: #ff0000;"></div>
+        <button type="button" onclick="PubNewJob(this);" class="btn btn-default">保存至待发布作业列表中</button>
+    </form>
+
+    <script>
+
+        window.jobType = -1;
+        window.jobCourse = -1;
+        function PubNewJob(obj){
+            var jobChapNo = $('#jobChapNo').val(); // 作业章节编号
+            var jobAssNo = $('#jobAssNo').val(); // 作业章内编号
+            var jobTitle = $('#jobTitle').val(); // 作业标题
+            var jobProDesc = $('#jobProDesc').val(); // 作业问题描述
+            var jobAnsCode = $('#jobAnsCode').val(); // 作业标准答案源代码
+            var jobInSample = $('#jobInSample').val(); // 作业输入样例
+            var jobInTest = $('#jobInTest').val(); // 作业测试用例
+            var jobTime_Start = $('#jobTime_Start').val(); // 作业开始时间
+            var jobTime_End = $('#jobTime_End').val(); // 作业结束时间
+            var jobNote = $('#jobNote').val(); // 作业备注
+            jobChapNo = jobChapNo =='' ? 0 : jobChapNo;
+            jobAssNo = jobAssNo =='' ? 0 : jobAssNo;
+            // 检查是否填写
+            if( window.jobType==-1 || window.jobCourse==-1 ){
+                alert('未选择作业类型或者课程名称！'); return;
+            }
+            if( jobTitle=='' || jobProDesc=='' || jobAnsCode=='' ){
+                alert('作业标题/问题/标准答案源代码的输入不能为空！'); return;
+            }
+            $.ajax({
+                type: "Post",
+                url: "api/doJob.php",
+                data: {
+                    type: 'pub', jobChapNo: jobChapNo, jobAssNo: jobAssNo, jobTitle: jobTitle,
+                    jobProDesc: jobProDesc, jobAnsCode: jobAnsCode,
+                    jobInSample: jobInSample, jobInTest: jobInTest, jobNote: jobNote,
+                    jobTime_Start: jobTime_Start, jobTime_End: jobTime_End,
+                    jobType: window.jobType, jobCourse: window.jobCourse
+                },
+                beforeSend: function(XMLHttpRequest){
+                    $('#result').html('请勿刷新，发布按钮需等待15s后才可以再次点击...');
+                    $(obj).attr("disabled","disable");
+                    setTimeout(function(){
+                        $(obj).text('再次发布,保存至待发布作业列表中');
+                        $(obj).removeAttr("disabled");
+                    }, 15000)
+                },
+                success: function(data){
+                    $('#result').html(data);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown){
+                    alert('连接出错，请检查网络或者联系管理员');
+                }
+            });
+        }
+
+        function OnChangeJobSelect(value, content){
+            $('#jobTypeCur').text(content);
+            window.jobType = value;
+        }
+
+        function OnChangeCourseSelect(value, content){
+            $('#jobCourse').text(content);
+            window.jobCourse = value;
+        }
+    </script>

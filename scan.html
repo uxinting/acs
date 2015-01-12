@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Scan</title>
+        
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        <style>
+            body {
+                font-family: 微软雅黑;
+                background: #FEFEFF;
+            }
+            
+            .page-header:hover {
+                cursor: pointer;
+                color: #2A6496;
+                //color: white;
+                text-shadow: 1px 0 0 blue;
+            }
+            
+            .popover {
+                max-width: 100%;
+            }
+            
+            .popover-content {
+                padding: 0;
+            }
+            
+            .popover .panel {
+                margin-bottom: 0;
+            }
+            .popover .panel-default {
+                border: 0;
+            }
+            
+            .popover pre {
+                white-space: normal;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="page-header">
+                    <h3> J0001111 <small> C1-1 </small></h3>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>学号</th>
+                            <th>姓名</th>
+                            <th>状态</th>
+                            <th>分数</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="success">
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr class="danger">
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>未完成</td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="dist/js/bootstrap.min.js"></script>
+        <script>
+            $('.page-header').popover({
+                trigger: 'click',
+                placement: 'bottom',
+                html: true,
+                delay: {
+                    show: 300,
+                    hide: 0
+                },
+                template: '<div class="popover"><div class="popover-content panel panel-default"></div></div>',
+                content: '<div class="panel-heading">普通骑士<a class="pull-right" href="job.html" target="_blank">#job1</a></div>\
+                        <div class="panel-body">\
+                            <h4>描述</h4>\
+                            <p><pre>奶牛们已厌倦了各种各样的变化的n皇后问题，他们开始解决骑士(国际象棋中的马称为骑士，即KNIGHT)问题并需要你的帮助。\
+\
+一个骑士在棋盘上能够做一些特定的移动。比如：一个普通的骑士能够向下移动两步，向右移动1步(在所有的可能移动当中的一种)。这种移动被标记为[-2, 1]\
+\
+更加一般的，一个符号[a,b] 表示a步向上移动(当a<0时表示向下移动)，b步向右移动(b<0时表示向左移动)。\
+\
+扩展这个符号，一种一般的移动规则(i,j)表示8种移动方式[+i, +j], [+i, -j], [-i, +j], [-i, -j], [+j, +i], [+j,-i], [-j, +i], [-j, -i]。\
+\
+奶牛们有一个n*n的棋盘，他们想知道最少放上几个骑士就可以控制整个棋盘，一个骑士可以控制它一步可以到达的格子，但是不能控制它自己所在的格子。</pre></p>\
+                            <h4>输入</h4>\
+                            <p><pre>\
+第一行：一个整数n(4<=n<=8)，表示棋盘的边长\
+\
+第二行：两个整数，i,j，(1 <= i,j <= N/2)，表示骑士的移动规则。</pre></p>\
+                            <h4>输出</h4>\
+                            <p><pre>\
+一个整数，表示控制棋盘最少需要放置的骑士的数目</pre></p>\
+                            <h4>样例输入</h4>\
+                            <p><pre>6\
+1 2</pre></p>\
+                            <h4>样例输出</h4>\
+                            <p><pre>8</pre></p>\
+                        </div>\
+                    </div>'
+            });
+        </script>
+    </body>
+</html>

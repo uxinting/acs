@@ -1,0 +1,101 @@
+@charset "utf-8";
+body {
+    padding-bottom: 80px;
+    font-family: 微软雅黑;
+    background: #FEFEFF;
+}
+
+header {
+    padding: 10px 0 20px 0;
+    margin-bottom: 25px;
+    border-bottom: solid rgb( 192, 192, 192 ) 1px;
+    font-family: 宋体;
+}
+
+.log-out {
+    float: right;
+    margin-top: 35px;
+}
+
+.self-info {
+    font-size: 12px;
+}
+
+#menu a,
+#menu a:focus {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    transition: 0.5s;
+    outline: none;
+}
+
+.panel-title a:hover {
+    padding-left: 1em;
+    transition: padding-left 0.5s;
+}
+
+.list-group-item {
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.panel-title .badge {
+    transform: scale(0.8, 0.8);
+}
+
+.active > a {
+    color: white;
+}
+
+#tools > .btn-group {
+    margin: 20px 0;
+}
+
+blockquote.bg-warning:hover {
+    cursor: pointer;
+    border-color: rgb( 102, 175, 233 );
+    transition: 0.2s;
+}
+
+td a,
+td a:focus,
+td a:visited {
+    display: inline-block;
+    width: auto;
+    color: blue;
+}
+
+.import {
+    position: relative;
+    min-width: 68px;
+    overflow: hidden;
+}
+
+.import input {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.import input:hover {
+    cursor: pointer;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-width: 800px;
+    padding: 0;
+    z-index: 100;
+}
+
+footer > div {
+    background: white;
+    font-size: 12px;
+    padding: 20px 0;
+    border-top: solid rgb( 32, 32, 32 ) 2px;
+}

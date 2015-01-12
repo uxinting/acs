@@ -1,0 +1,795 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Admin</title>
+        
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/jquery-ui.css" rel="stylesheet">
+        <link href="grid/pqgrid.min.css" rel="stylesheet">
+        <style>
+            body {
+                padding-bottom: 80px;
+                font-family: 微软雅黑;
+                background: #FEFEFF;
+            }
+            
+            header {
+                padding: 10px 0 20px 0;
+                margin-bottom: 25px;
+                border-bottom: solid rgb( 192, 192, 192 ) 1px;
+                font-family: 宋体;
+            }
+            
+            .log-out {
+                float: right;
+                margin-top: 35px;
+            }
+            
+            .self-info {
+                font-size: 12px;
+            }
+            
+            #menu a,
+            #menu a:focus {
+                display: block;
+                width: 100%;
+                text-decoration: none;
+                transition: 0.5s;
+                outline: none;
+            }
+            
+            .panel-title a:hover {
+                padding-left: 1em;
+                transition: padding-left 0.5s;
+            }
+            
+            .list-group-item {
+                width: 100%;
+                padding: 10px 15px;
+            }
+            
+            .panel-title .badge {
+                transform: scale(0.8, 0.8);
+            }
+            
+            .active > a {
+                color: white;
+            }
+            
+            #tools > .btn-group {
+                margin: 20px 0;
+            }
+            
+            blockquote.bg-warning:hover {
+                cursor: pointer;
+                border-color: rgb( 102, 175, 233 );
+                transition: 0.2s;
+            }
+            
+            td a,
+            td a:focus,
+            td a:visited {
+                display: inline-block;
+                width: auto;
+                color: blue;
+            }
+            
+            select {
+                width: 100%;
+            }
+            
+            .ui-state-highlight {
+                background: #6699CC;
+            }
+            
+            .import {
+                position: relative;
+                min-width: 68px;
+                overflow: hidden;
+            }
+            
+            .import input {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                opacity: 0;
+            }
+            
+            .import input:hover {
+                cursor: pointer;
+            }
+            
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                min-width: 800px;
+                padding: 0;
+                z-index: 100;
+            }
+            
+            footer > div {
+                background: white;
+                font-size: 12px;
+                padding: 20px 0;
+                border-top: solid rgb( 32, 32, 32 ) 2px;
+            }
+        </style>
+    </head>
+
+    <body class="container">
+        <header class="row">
+            <div class="col-md-10">
+                <h1><span style="color: red; font: italic bold 55px arial;">C</span>语言作业提交系统</h1>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-lg log-out">
+                    退出
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </button>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="self-info">
+                    <p>姓名：<b>甘早斌</b></p>
+                    <p>工号：M201288888</p>
+                    <p>学院：计算机科学与技术学院</p>
+                    <p>专业：计算机应用技术</p>
+                </div>
+                <div id="menu" class="panel-group" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#member" aria-controls="member">
+                                    人员管理
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="member" class="panel-collapse collapse" role="tabpanel">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#student" aria-controls="student">学生管理</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#teacher" aria-controls="teacher">教师管理</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#teach" aria-controls="member">
+                                    授课管理
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="teach" class="panel-collapse collapse" role="tabpanel">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#class-m" aria-controls="class-m">班级管理</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#teach-m" aria-controls="teach-m">教师授课</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#course-m" aria-controls="course-m">课程管理</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#profile" aria-expanded="false" aria-controls="profile">
+                                    个人设置
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="profile" class="panel-collapse collapse" role="tabpanel">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#password" aria-controls="password">密码修改</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#personal" aria-controls="personal">信息修改</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="tab" href="#log" aria-controls="log">
+                                    历史记录
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="tab" href="#msg" aria-controls="msg">
+                                    通知<span class="badge">1</span>
+                                </a>
+                            </h4>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9 tab-content">
+                
+                <div id="student" class="tab-pane fade in" role="tabpanel">
+                    <div><a class="btn btn-default" href="download.html?f=1.zip" target="_blank">导出</a>
+                        <div class="import btn btn-default">
+                            导入(.xls)
+                            <input type="file" >
+                        </div>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>学号</th>
+                                <th>姓名</th>
+                                <th>班级</th>
+                                <th>学院</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>M201288888</td>
+                                <td>吴新庭</td>
+                                <td>硕12002</td>
+                                <td>计算机</td>
+                            </tr>
+                            <tr>
+                                <td>M201288888</td>
+                                <td>吴新庭</td>
+                                <td>硕12002</td>
+                                <td>计算机</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="teacher" class="tab-pane fade in" role="tabpanel">
+                    <div><a class="btn btn-default" href="download.html?f=1.zip" target="_blank">导出</a>
+                        <div class="import btn btn-default">
+                            导入(.xls)
+                            <input type="file" >
+                        </div>
+                    </div>
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>工号</th>
+                                <th>姓名</th>
+                                <th>学院</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>M201288888</td>
+                                <td>甘早斌</td>
+                                <td>计算机</td>
+                            </tr>
+                            <tr>
+                                <td>M201288888</td>
+                                <td>甘早斌</td>
+                                <td>计算机</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="class-m" class="tab-pane fade" role="tabpanel" data-content="class">
+                    <div id="class-m-table"></div>
+                    <button id="class-m-save" class="btn btn-xs btn-info">Save</button>
+                </div>
+                
+                <div id="teach-m" class="tab-pane fade" role="tabpanel" data-content="teach">
+                    <div id="teach-m-table"></div>
+                    <button id="teach-m-save" class="btn btn-xs btn-info">Save</button>
+                </div>
+                
+                <div id="course-m" class="tab-pane fade" role="tabpanel" data-content="course">
+                    <div id="course-m-table"></div>
+                    <button id="course-m-save" class="btn btn-xs btn-info">Save</button>
+                </div>
+                
+                <div id="password" class="tab-pane fade" role="tabpanel">
+                    <form role="form" class="form-horizontal col-sm-offset-2">
+                        <div class="form-group">
+                            <label for="passwd0" class="col-sm-2 control-label">旧密码</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="passwd0" placeholder="Old Password" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd1" class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="passwd1" placeholder="New Password" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd2" class="control-label col-sm-2">新密码</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="passwd2" placeholder="New Password" required="true">
+                            </div>
+                            <span id="errorMsg" class="help-block"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-5">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="personal" class="tab-pane fade" role="tabpanel">
+                    <form role="form" class="form-horizontal col-sm-offset-2">
+                        <div class="form-group">
+                            <label for="recvemail" class="col-sm-2 control-label">通知邮箱</label>
+                            <div class="col-sm-5">
+                                <input type="email" class="form-control" id="recvemail" placeholder="Email" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-5">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="log" class="tab-pane fade" role="tabpanel">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>日志</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>布置作业<a href="#">job1</a></td>
+                                <td>2014-12-3</td>
+                            </tr>
+                            <tr>
+                                <td>布置作业<a href="#">job2</a></td>
+                                <td>2014-12-3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="msg" class="tab-pane fade" role="tabpanel">
+                    <blockquote class="bg-warning">
+                        <p>作业<u>job1</u>即将到期，请注意查看</p>
+                    </blockquote>
+                    <blockquote class="bg-warning">
+                        <p>你布置的作业<u>job2</u>有2人没有通过</p>
+                    </blockquote>
+                    <blockquote>
+                        <p>你布置了新作业<u>job3</u></p>
+                    </blockquote>
+                </div>
+            </div>
+            
+        </div>
+        
+        <footer>
+            <div class="container">
+                <div class="col-md-6"> &copy;2006-2014 华中科技大学C语言作业提交&nbsp;湖北省武汉市洪山区珞喻路1037号</div>
+                <div class="col-md-6">邮政编码：430074 电话：027-87540101  信箱：hubsupport@mail.hust.edu.cn</div>
+            </div>
+        </footer>
+        <!--
+        <div class="modal fade" id="commit" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">提交作业</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" class="form-horizontal col-sm-offset-2">
+                            <div class="form-group">
+                                <label for="jobID" class="col-sm-3 control-label">作业ID</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="jobID" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <input type="file" id="file" accept=".c/.cpp">
+                                    <p class="help-block">选择作业源文件</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="dist/js/bootstrap.min.js"></script>
+        <script src="js/jquery.cookie.js"></script>
+        <script src="grid/pqgrid.min.js"></script>
+        <script>
+            //Editable table
+            $(function(){
+                var allTeachers = [
+                    '甘早斌',
+                    '鲁宏伟'
+                ];
+                
+                var allCourses = [
+                    'C语言程序设计',
+                    '软件设计'
+                ];
+                var allClasses = [
+                    '计2-3',
+                    '计2-4',
+                ];
+                var allAcas = [
+                    '计算机'
+                ];
+                var allTerms = [
+                    '12~13'
+                ];
+                
+                var data = { teach: [ ["甘早斌",'C语言程序设计','计2-3','12~13', '无'],
+                                    ["鲁宏伟",'软件设计','计2-3','12~13', '无']],
+                            class: [["1213", '计2-3', '计2-3', '计算机', '无'],
+                                   ["1214", '计2-3', '计2-3', '计算机', '无']],
+                            course: [['C语言程序设计', '无'], ['软件设计', '无']]};
+                
+                function getRowIndx() {
+                    var arr = $('.tab-pane.active>div').pqGrid("selection", { type: 'row', method: 'getSelection' });
+                    if (arr && arr.length > 0) {
+                        var rowIndx = arr[0].rowIndx;
+
+                        //if (rowIndx != null && colIndx == null) {
+                        return rowIndx;
+                    }
+                    else {
+                        alert("Select a row.");
+                        return null;
+                    }
+                }
+                //append Row
+                function addRow() {
+                    var content = $('.tab-pane.active').data('content');
+                    data[content].splice(0, 0, []);
+                    $('.tab-pane.active>div').pqGrid("refreshDataAndView");
+                }
+                //delete Row.
+                function deleteRow() {
+                    var rowIndx = getRowIndx();
+                    if (rowIndx != null) {
+                        var DM = $('.tab-pane.active>div').pqGrid("option", "dataModel");
+                        DM.data.splice(rowIndx, 1);
+                        $('.tab-pane.active>div').pqGrid("refreshDataAndView");
+                        $('.tab-pane.active>div').pqGrid("setSelection", { rowIndx: rowIndx });
+                    }
+                }
+                
+                var dropDownEditor = function (ui, arr) {
+                    var $cell = ui.$cell, data = ui.data, rowIndx = ui.rowIndxPage, colIndx = ui.colIndx;
+                    var dataCell = $.trim(data[rowIndx][colIndx]);
+                    var str = "";
+                    for (var i = 0; i < arr.length; i++) {
+                        if (dataCell == arr[i])
+                            str += "<option selected>" + arr[i] + "</option>";
+                        else
+                            str += "<option>" + arr[i] + "</option>";
+                    }
+                    var $sel = $("<select>" + str + "</select>")
+                    .appendTo($cell);
+                }
+                
+                var saveCell = function (ui) {
+                    var $cell = ui.$cell;
+                    return $cell.children().val();
+                };
+                
+                //append or prepend the CRUD toolbar to .pq-grid-top or .pq-grid-bottom
+                ['#teach-m-table','#course-m-table','#class-m-table'].forEach(function(e){$(e).on("pqgridrender", function (evt, obj) {
+                    var $toolbar = $("<div class='pq-grid-toolbar pq-grid-toolbar-crud'></div>").appendTo($(".pq-grid-top", this));
+
+                    $("<div class='btn btn-xs btn-primary' style='margin-right:5px;padding:1px 5px;'>Add</div>").appendTo($toolbar).button({ icons: { primary: "ui-icon-circle-plus"} }).click(function (evt) {
+                        addRow();
+                    });
+                    $("<div class='btn btn-xs btn-danger' style='margin-right:5px;padding:1px 5px;'>Delete</div>").appendTo($toolbar).button({ icons: { primary: "ui-icon-circle-minus"} }).click(function () {
+                        deleteRow();
+                    });
+                    $toolbar.disableSelection();
+                });});
+                
+                $('a[data-toggle="tab"][href="#teach-m"]').on( 'shown.bs.tab', function(e) {
+                    if($('#teach-m-table').html()) return;
+                    $("#teach-m-table").pqGrid( {
+                        width: 700,
+                        height: 400,
+                        title: "老师授课表",
+                        bottomVisible: false,
+                        flexWidth: true,
+                        selectionModel: { type: 'row' },
+                        editModel: { saveKey: '13' },
+                        colModel: [{title:"老师姓名", width:100, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allTeachers);
+                                }, getEditCellData: saveCell},
+                            {title:"课程名称", width:150, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allCourses);
+                                }, getEditCellData: saveCell},
+                            {title:"班级名称", width:150, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allClasses);
+                                }, getEditCellData: saveCell},
+                            {title:"学期", width:100, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allTerms);
+                                }, getEditCellData: saveCell},
+                            {title:"备注", width:200, dataType:"string"}],
+                        scrollModel: {
+                            horizontal: false
+                        },
+                        dataModel: {
+                            data: data.teach
+                        }
+                    } )
+                    .pqGrid("refreshDataAndView");
+                } );
+                
+                $('a[data-toggle="tab"][href="#course-m"]').on( 'shown.bs.tab', function(e) {
+                    if($('#course-m-table').html()) return;
+                    $("#course-m-table").pqGrid( {
+                        width: 700,
+                        height: 400,
+                        title: "课程",
+                        bottomVisible: false,
+                        flexWidth: true,
+                        selectionModel: { type: 'row' },
+                        editModel: { saveKey: '13' },
+                        colModel: [{title:"课程名", width:300, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allCourses);
+                                }, getEditCellData: saveCell},
+                            {title:"备注", width:400, dataType:"string"}],
+                        scrollModel: {
+                            horizontal: false
+                        },
+                        dataModel: {
+                            data: data.course
+                        }
+                    } )
+                    .pqGrid("refreshDataAndView");
+                });
+                
+                $('a[data-toggle="tab"][href="#class-m"]').on( 'shown.bs.tab', function(e) {
+                    if($('#class-m-table').html()) return;
+                    $("#class-m-table").pqGrid( {
+                        width: 700,
+                        height: 400,
+                        title: "班级表",
+                        bottomVisible: false,
+                        flexWidth: true,
+                        selectionModel: { type: 'row' },
+                        editModel: { saveKey: '13' },
+                        colModel: [{title:"班级ID", width:100, dataType:"integer", editable: false },
+                            {title:"班级名称", width:150, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allClasses);
+                                }, getEditCellData: saveCell},
+                            {title:"班级简称", width:150, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allClasses);
+                                }, getEditCellData: saveCell},
+                            {title:"所属院系", width:100, dataType:"string", editor: function (ui) {
+                                    dropDownEditor(ui, allAcas);
+                                }, getEditCellData: saveCell},
+                            {title:"备注", width:200, dataType:"string"}],
+                        scrollModel: {
+                            horizontal: false
+                        },
+                        dataModel: {
+                            data: data.class
+                        }
+                    } )
+                    .pqGrid("refreshDataAndView");
+                });
+                
+                $('#teach-m-save').click(function(e){
+                    var str = $.paramquery.tableToArray( $('#teach-m-table .pq-cont table') );
+                    alert( str.data );
+                    alert( data.teach );
+                });
+                
+                $('#course-m-save').click(function(e){
+                    var str = $.paramquery.tableToArray( $('#course-m-table .pq-cont table') );
+                    alert( str.data );
+                    alert( data.course );
+                });
+                
+                $('#class-m-save').click(function(e){
+                    var str = $.paramquery.tableToArray( $('#class-m-table .pq-cont table') );
+                    alert( str.data );
+                    alert( data.class );
+                });
+                
+
+                //Retrive Panel Status
+                function retrivePanel() {
+                    var id = $.cookie( 'active' );
+                    if ( id == undefined ) id = '#student';
+                    //$(id).addClass( 'active in' );
+                    $('a[href="'+id+'"]').parents('.collapse').collapse('show');
+
+                    var content = $.cookie( 'content' );
+                    if ( content != "" ) {
+                        $('li>a[href="'+id+'"][data-content="'+content+'"]').tab('show');//parent().addClass('active');
+                    } else {
+                        $('li>a[href="'+id+'"]').tab('show');//parent().addClass('active');
+                    }
+                }
+
+                //Save Panel Status
+                function savePanel( ele ) {
+                    $.cookie("active", $(ele).attr( 'href' ));
+                    var content = $(ele).data( 'content' );
+                    if ( content == undefined )
+                        $.cookie("content", "");
+                    else
+                        $.cookie("content", content);
+                }
+
+                function changePage( page ) {
+                    if ( page < 1 ) return;
+
+                    var jobs = $('#job .list-group-item.choose');
+
+                    if ( Math.ceil(jobs.length/6) < page ) return;
+                    for ( var i = 0; i < jobs.length; i++ ) {
+                        if ( i >= (page-1)*6 && i < page*6 ) {
+                            $(jobs[i]).show();
+                        } else {
+                            $(jobs[i]).hide();
+                        }
+                    }
+
+                    $('#job nav ul li.active').removeClass( 'active' );
+                    $('#job nav ul li:nth-child('+(page+1)+')').addClass( 'active' );
+                }
+
+                function updatePagination( page ) {
+                    var jobs = $('#job .list-group-item.choose');
+                    var pages = Math.ceil( jobs.length / 6 ); //Every page contain 6 jobs
+                    if ( pages <= 1 ) {
+                        $('#job nav').hide();
+                    } else {
+                        $('#job nav').show();
+                        $('#job nav ul li').remove( 'li:not(:first-child):not(:last-child)' );
+                        var right = $('#job nav ul li:last-child');
+                        if ( pages <= 6 ) { //Between 1~6 pages
+                            for ( var i = 1; i <= pages; i++ ) {
+                                $('<li><a href="#">'+i+'</a></li>').insertBefore( right );
+                            }
+                        } else { //more than 6 pages
+                            for ( var i = 1; i <= pages / 2; i++ ) {
+                                $('<li><a href="#">'+i+'</a></li>').insertBefore( right );
+                            }
+                            $('<li><a href="#">...</a></li>').insertBefore( right );
+                            for ( var i = Math.ceil( pages/2 ); i <= pages; i++ ) {
+                                $('<li><a href="#">'+i+'</a></li>').insertBefore( right );
+                            }
+                        }
+                    }
+                    if ( page )
+                        changePage( 1 );
+                }
+
+                function updateWithFilter() {
+                    var stime = $('#flttime').text();
+                    var time = 0;
+                    if ( stime == '一月内' ) {
+                    } else if ( stime == '一周内' ) {
+                    } else {};
+
+                    var teacher = $('#fltteacher').text();
+                    var course = $('#fltcourse').text();
+                    var content = $('#jobcontrol li.active a').text();
+                    if ( content == '' ) content = '全部';
+
+                    $('#job>.list-group li:first-child').text( stime + ' ' + teacher + ' ' + course );
+
+                    var jobs = $('#job .list-group-item');
+                    for ( var i = 1; i < jobs.length; i++ ) {
+                        var jtime = $(jobs[i]).find( 'p>span' ).text();
+                        var jtchr = $(jobs[i]).find( 'p>em' ).text();
+                        var jcors = $(jobs[i]).find( 'p>small' ).text();
+                        var jcontent = $(jobs[i]).find( 'h4 span' ).text();
+
+                        if ( content != '全部' && content != jcontent ||
+                             teacher != '全部教师' && teacher != jtchr ||
+                             course != '全部科目' && course != jcors ) {
+                            $(jobs[i]).hide().removeClass( 'choose' );
+                        } else {
+                            $(jobs[i]).show().addClass( 'choose' );
+                        }
+                    }
+                    updatePagination( 1 );
+                }
+
+                updateWithFilter();
+                retrivePanel();
+
+                $('#job nav ul').click( function (e) {
+                    var spage = $('li:hover a').text();
+                    var curpage = parseInt( $('#tools nav li.active a').text() );
+                    if ( spage == '«' ) {
+                        curpage--;
+                    } else if ( spage == '»' ) {
+                        curpage++;
+                    } else {
+                        curpage = parseInt( spage );
+                    }
+                    changePage( curpage );
+                } )
+
+                $('#tools ul[role="menu"] li').click( function (e) {
+                    var text = $(this).find( 'a' ).text();
+                    $(this).parentsUntil( '.btn-group' ).siblings( 'button' ).text( text );
+
+                    updateWithFilter();
+                } )
+
+                $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                    $('a[data-toggle="tab"]').parent().removeClass("active");
+                    savePanel( this );
+                }).on('shown.bs.tab', function (e) {
+                    updateWithFilter();
+                } )
+
+                //Close Last Collapse
+                $('.panel-title').click( function(e) {
+                    $('.collapse.in').collapse( 'hide' );
+                } );
+
+                $('a[href="#msg"]').on('shown.bs.tab', function (e) {
+                    $(e.target).find('.badge').hide();
+                })
+
+                $('blockquote.bg-warning').click( function (e) {
+                    $(this).removeClass('bg-warning');
+                } )
+
+                $('#password form').submit(function(e) {
+                    var p1 = $('#passwd1').val();
+                    var p2 = $('#passwd2').val();
+                    if ( p1 == p2 ) {
+                        $('#passwd1').parents('.form-group').removeClass('has-error');
+                        $('#passwd2').parents('.form-group').removeClass('has-error');
+                        if ( p1.length < 8 ) {
+                            $('#errorMsg').text('新密码小于8位');
+                            return false;
+                        }
+                    } else {
+                        $('#passwd1').parents('.form-group').addClass('has-error');
+                        $('#passwd2').parents('.form-group').addClass('has-error');
+                        $('#errorMsg').text('两次密码不一致');
+                        return false;
+                    }
+                })
+            });
+
+        </script>
+    </body>
+</html>

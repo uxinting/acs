@@ -1,0 +1,702 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Student</title>
+        
+        <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body {
+                padding-bottom: 50px;
+                font-family: 微软雅黑;
+                background: #FEFEFF;
+            }
+            
+            header {
+                padding: 10px 0 20px 0;
+                margin-bottom: 25px;
+                border-bottom: solid rgb( 192, 192, 192 ) 1px;
+                font-family: 宋体;
+            }
+            
+            .log-out {
+                float: right;
+                margin-top: 35px;
+            }
+            
+            .self-info {
+                font-size: 12px;
+            }
+            
+            #menu a,
+            #menu a:focus {
+                display: block;
+                width: 100%;
+                text-decoration: none;
+                transition: 0.5s;
+                outline: none;
+            }
+            
+            .panel-title a:hover {
+                padding-left: 1em;
+                transition: padding-left 0.5s;
+            }
+            
+            .list-group-item {
+                width: 100%;
+                padding: 10px 15px;
+            }
+            
+            .panel-title .badge {
+                transform: scale(0.8, 0.8);
+            }
+            
+            .active > a {
+                color: white;
+            }
+            
+            #job .list-group-item:not(:first-child) {
+                margin-bottom: 5px;
+            }
+            
+            #job .list-group-item:not(:first-child):hover {
+                box-shadow: 0 0 1px blue;
+                border-color: rgb( 102, 175, 233 );
+            }
+            
+            #job .list-group-item p:last-child a {
+                float: right;
+            }
+            
+            #job .list-group-item h4 .label,
+            #job .list-group-item h4 mark {
+                font-size: 12px;
+                float: right;
+                margin-left: 5px;
+            }
+            
+            #job .list-group-item h4 a {
+                color: black;
+                margin-left: 5px;
+                width: auto;
+                float: right;
+            }
+            
+            #job nav {
+                display: inline-block;
+            }
+            
+            #job nav a {
+                float: none;
+                //margin-left: -3px;
+            }
+            
+            #tools > .btn-group {
+                margin: 20px 0;
+            }
+            
+            blockquote.bg-warning:hover {
+                cursor: pointer;
+                border-color: rgb( 102, 175, 233 );
+                transition: 0.2s;
+            }
+            
+            td a,
+            td a:focus,
+            td a:visited {
+                display: inline-block;
+                width: auto;
+                color: blue;
+            }
+            
+            .opage {
+                display: none;
+            }
+            
+            footer {
+                //position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                min-width: 800px;
+                padding: 0;
+                z-index: 100;
+            }
+            
+            footer > div {
+                background: white;
+                font-size: 12px;
+                padding: 20px 0;
+                border-top: solid rgb( 32, 32, 32 ) 2px;
+            }
+        </style>
+    </head>
+
+    <body class="container">
+        <header class="row">
+            <div class="col-md-10">
+                <h1><span style="color: red; font: italic bold 55px arial;">C</span>语言作业提交系统</h1>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-default btn-lg log-out">
+                    退出
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </button>
+            </div>
+        </header>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="self-info">
+                    <p>姓名：<b>吴新庭</b></p>
+                    <p>学号：M201288888</p>
+                    <p>学院：计算机科学与技术学院</p>
+                    <p>专业：计算机应用技术</p>
+                    <p>班级：计算机硕1202</p>
+                </div>
+                <div id="menu" class="panel-group" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#jobcontrol" aria-controls="jobcontrol">
+                                    我的作业
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="jobcontrol" class="panel-collapse collapse" role="tabpanel">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#job" aria-controls="job" data-content="uncomplete">未完成</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#job" aria-controls="job" data-content="completed">已完成</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#job" aria-controls="job" data-content="all">全部</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#profile" aria-expanded="false" aria-controls="profile">
+                                    个人设置
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="profile" class="panel-collapse collapse" role="tabpanel">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#password" aria-controls="password">密码修改</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a data-toggle="tab" href="#personal" aria-controls="personal">信息修改</a>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="tab" href="#log" aria-controls="log">
+                                    历史记录
+                                </a>
+                            </h4>
+                        </div>
+
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title">
+                                <a data-toggle="tab" href="#msg" aria-controls="msg">
+                                    通知<span class="badge">1</span>
+                                </a>
+                            </h4>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9 tab-content">
+                
+                <div id="job" class="tab-pane fade in" role="tabpanel">
+                    
+                    <div id="tools">
+                        <nav>
+                            <ul class="pagination pagination-sm">
+                                <li><a href="#">&laquo;</a></li>
+                                <li><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#">&raquo;</a></li>
+                            </ul>
+                        </nav>
+                        <div class="btn-group btn-group-sm">
+                            <div class="btn-group btn-group-sm">
+                                <button id="flttime" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">全部时间</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">一周内</a></li>
+                                    <li><a href="#">一月内</a></li>
+                                    <li><a href="#">全部时间</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group btn-group-sm">
+                                <button id="fltteacher" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">全部教师</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">甘早斌</a></li>
+                                    <li><a href="#">鲁宏伟</a></li>
+                                    <li><a href="#">全部教师</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn-group btn-group-sm">
+                                <button id="fltcourse" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">全部科目</button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">C语言程序设计</a></li>
+                                    <li><a href="#">软件工程</a></li>
+                                    <li><a href="#">全部科目</a></li>
+                                </ul>
+                            </div>
+                            <div class="btn btn-default btn-sm" disabled>
+                                  <span class="caret"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-info">
+                            全部时间&nbsp;全部教师&nbsp;全部科目
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业1：冒泡排序算法
+                                <a data-toggle="collapse" aria-expanded="false" href="#job1" aria-controls="job1" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-success">已完成</span>
+                                <mark>100</mark>
+                            </h4>
+                            <div id="job1" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>实现冒泡排序算法</pre>
+                            </div>
+                            <p><em>甘早斌</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>C语言程序设计</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job1" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业2：实现KMP算法
+                                <a data-toggle="collapse" aria-expanded="false" href="#job2" aria-controls="job2" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-danger">未完成</span>
+                            </h4>
+                            <div id="job2" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>实现KMP算法</pre>
+                            </div>
+                            <p><em>甘早斌</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>C语言程序设计</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job2" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业3：打印一个菱形
+                                <a data-toggle="collapse" aria-expanded="false" href="#job3" aria-controls="job3" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-danger">未完成</span>
+                            </h4>
+                            <div id="job3" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>打印一个菱形</pre>
+                            </div>
+                            <p><em>甘早斌</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>C语言程序设计</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job3" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业4：IO输出
+                                <a data-toggle="collapse" aria-expanded="false" href="#job4" aria-controls="job4" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-success">已完成</span>
+                                <mark>100</mark>
+                            </h4>
+                            <div id="job4" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>输出两行内容，第一行输出“我的名字是XXX”，换行后输出第二行“这是我的第一个C语言程序！”</pre>
+                            </div>
+                            <p><em>甘早斌</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>C语言程序设计</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job4" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业5：计算周长
+                                <a data-toggle="collapse" aria-expanded="false" href="#job5" aria-controls="job5" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-success">已完成</span>
+                                <mark>80</mark>
+                            </h4>
+                            <div id="job5" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>计算长5.90，宽93.2的长方形周长</pre>
+                            </div>
+                            <p><em>鲁宏伟</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>软件工程</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job5" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业5.1：计算周长2
+                                <a data-toggle="collapse" aria-expanded="false" href="#job51" aria-controls="job51" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-success">已完成</span>
+                                <mark>80</mark>
+                            </h4>
+                            <div id="job51" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>计算半径20米的圆形周长</pre>
+                            </div>
+                            <p><em>鲁宏伟</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>软件工程</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job51" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                        <li class="list-group-item">
+                            <h4>作业6：成绩管理系统
+                                <a data-toggle="collapse" aria-expanded="false" href="#job6" aria-controls="job6" role="tab">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </a>
+                                <span class="label label-danger">未完成</span>
+                            </h4>
+                            <div id="job6" role="tabpanel" aria-expanded="false" class="collapse">
+                                <pre>用C语言编写一个程序实现学员成绩管理，每个学员包括3门课的成绩。从
+键盘
+输入学员信息，包括学号.姓名.三门课成绩，按照学员平均成绩由大到小排序。另外需要增加下面的管理功能。
+
+插入功能：在排序后的学员成绩表中插入一个学员的信息，要求插入后仍然保持成绩表原有排序。
+
+删除功能：要求输入指定的学号，从学员信息表中删除该学员，删除后的成绩表保持原有的排序。</pre>
+                            </div>
+                            <p><em>甘早斌</em>&nbsp;&nbsp;&nbsp;&nbsp;<small>C语言程序设计</small></p>
+                            <p><span>2013.12.3</span>~2014.12.30&nbsp;剩余<span class="badge">28</span>天
+                                <a href="job.html?job=job6" class="btn btn-xs btn-default" target="_blank">详细</a>
+                            </p>
+                        </li>
+                    </ul>
+                    <nav>
+                        <ul class="pagination pagination-sm">
+                            <li><a href="#">&laquo;</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div id="password" class="tab-pane fade" role="tabpanel">
+                    <form role="form" class="form-horizontal col-sm-offset-2">
+                        <div class="form-group">
+                            <label for="passwd0" class="col-sm-2 control-label">旧密码</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="passwd0" placeholder="Old Password" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd1" class="col-sm-2 control-label">新密码</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="passwd1" placeholder="New Password" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="passwd2" class="control-label col-sm-2">新密码</label>
+                            <div class="col-sm-5">
+                                <input type="password" class="form-control" id="passwd2" placeholder="New Password" required="true">
+                            </div>
+                            <span id="errorMsg" class="help-block"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-5">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="personal" class="tab-pane fade" role="tabpanel">
+                    <form role="form" class="form-horizontal col-sm-offset-2">
+                        <div class="form-group">
+                            <label for="recvemail" class="col-sm-2 control-label">通知邮箱</label>
+                            <div class="col-sm-5">
+                                <input type="email" class="form-control" id="recvemail" placeholder="Email" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-5">
+                                <button type="submit" class="btn btn-primary">确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="log" class="tab-pane fade" role="tabpanel">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>日志</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>提交作业<a href="#">job1</a></td>
+                                <td>2014-12-3</td>
+                            </tr>
+                            <tr>
+                                <td>提交作业<a href="#">job2</a></td>
+                                <td>2014-12-3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="msg" class="tab-pane fade" role="tabpanel">
+                    <blockquote class="bg-warning">
+                        <p>作业<u>job1</u>即将到期，请尽快提交答案</p>
+                    </blockquote>
+                    <blockquote class="bg-warning">
+                        <p>你提交的作业<u>job2</u>没有检验通过</p>
+                    </blockquote>
+                    <blockquote>
+                        <p>教师<strong>甘早斌</strong>布置了新作业</p>
+                    </blockquote>
+                </div>
+            </div>
+            
+        </div>
+        
+        <footer>
+            <div class="container">
+                <div class="col-md-6"> &copy;2006-2014 华中科技大学C语言作业提交&nbsp;湖北省武汉市洪山区珞喻路1037号</div>
+                <div class="col-md-6">邮政编码：430074 电话：027-87540101  信箱：hubsupport@mail.hust.edu.cn</div>
+            </div>
+        </footer>
+        <!--
+        <div class="modal fade" id="commit" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">提交作业</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form role="form" class="form-horizontal col-sm-offset-2">
+                            <div class="form-group">
+                                <label for="jobID" class="col-sm-3 control-label">作业ID</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="jobID" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-6">
+                                    <input type="file" id="file" accept=".c/.cpp">
+                                    <p class="help-block">选择作业源文件</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="dist/js/bootstrap.min.js"></script>
+        <script src="js/jquery.cookie.js"></script>
+        <script>
+            //Retrive Panel Status
+            function retrivePanel() {
+                var id = $.cookie( 'active' );
+                if ( id == undefined ) id = '#job';
+                $(id).addClass( 'active in' );
+                $('a[href="'+id+'"]').parents('.collapse').collapse('show');
+                
+                var content = $.cookie( 'content' );
+                if ( content != "" ) {
+                    $('li>a[href="'+id+'"][data-content="'+content+'"]').parent().addClass('active');
+                } else {
+                    $('li>a[href="'+id+'"]').parent().addClass('active');
+                }
+            }
+            
+            //Save Panel Status
+            function savePanel( ele ) {
+                $.cookie("active", $(ele).attr( 'href' ));
+                var content = $(ele).data( 'content' );
+                if ( content == undefined )
+                    $.cookie("content", "");
+                else
+                    $.cookie("content", content);
+            }
+            
+            function changePage( page ) {
+                if ( page < 1 ) return;
+                
+                var jobs = $('#job .list-group-item.choose');
+                
+                if ( Math.ceil(jobs.length/6) < page ) return;
+                for ( var i = 0; i < jobs.length; i++ ) {
+                    if ( i >= (page-1)*6 && i < page*6 ) {
+                        $(jobs[i]).show();
+                    } else {
+                        $(jobs[i]).hide();
+                    }
+                }
+                
+                $('#job nav ul li.active').removeClass( 'active' );
+                $('#job nav ul li:nth-child('+(page+1)+')').addClass( 'active' );
+            }
+            
+            function updatePagination( page ) {
+                var jobs = $('#job .list-group-item.choose');
+                var pages = Math.ceil( jobs.length / 6 ); //Every page contain 6 jobs
+                if ( pages <= 1 ) {
+                    $('#job nav').hide();
+                } else {
+                    $('#job nav').show();
+                    $('#job nav ul li').remove( 'li:not(:first-child):not(:last-child)' );
+                    var right = $('#job nav ul li:last-child');
+                    if ( pages <= 6 ) { //Between 1~6 pages
+                        for ( var i = 1; i <= pages; i++ ) {
+                            $('<li><a href="#">'+i+'</a></li>').insertBefore( right );
+                        }
+                    } else { //more than 6 pages
+                        for ( var i = 1; i <= pages / 2; i++ ) {
+                            $('<li><a href="#">'+i+'</a></li>').insertBefore( right );
+                        }
+                        $('<li><a href="#">...</a></li>').insertBefore( right );
+                        for ( var i = Math.ceil( pages/2 ); i <= pages; i++ ) {
+                            $('<li><a href="#">'+i+'</a></li>').insertBefore( right );
+                        }
+                    }
+                }
+                if ( page )
+                    changePage( 1 );
+            }
+            
+            function updateWithFilter() {
+                var stime = $('#flttime').text();
+                var time = 0;
+                if ( stime == '一月内' ) {
+                } else if ( stime == '一周内' ) {
+                } else {};
+                
+                var teacher = $('#fltteacher').text();
+                var course = $('#fltcourse').text();
+                var content = $('#jobcontrol li.active a').text();
+                if ( content == '' ) content = '全部';
+                
+                $('#job>.list-group li:first-child').text( stime + ' ' + teacher + ' ' + course );
+                
+                var jobs = $('#job .list-group-item');
+                for ( var i = 1; i < jobs.length; i++ ) {
+                    var jtime = $(jobs[i]).find( 'p>span' ).text();
+                    var jtchr = $(jobs[i]).find( 'p>em' ).text();
+                    var jcors = $(jobs[i]).find( 'p>small' ).text();
+                    var jcontent = $(jobs[i]).find( 'h4 span' ).text();
+                    
+                    if ( content != '全部' && content != jcontent ||
+                         teacher != '全部教师' && teacher != jtchr ||
+                         course != '全部科目' && course != jcors ) {
+                        $(jobs[i]).hide().removeClass( 'choose' );
+                    } else {
+                        $(jobs[i]).show().addClass( 'choose' );
+                    }
+                }
+                updatePagination( 1 );
+            }
+            
+            updateWithFilter();
+            retrivePanel();
+            
+            $('#job nav ul').click( function (e) {
+                var spage = $('li:hover a').text();
+                var curpage = parseInt( $('#tools nav li.active a').text() );
+                if ( spage == '«' ) {
+                    curpage--;
+                } else if ( spage == '»' ) {
+                    curpage++;
+                } else {
+                    curpage = parseInt( spage );
+                }
+                changePage( curpage );
+            } )
+            
+            $('#tools ul[role="menu"] li').click( function (e) {
+                var text = $(this).find( 'a' ).text();
+                $(this).parentsUntil( '.btn-group' ).siblings( 'button' ).text( text );
+                
+                updateWithFilter();
+            } )
+            
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+                $('a[data-toggle="tab"]').parent().removeClass("active");
+                savePanel( this );
+            }).on('shown.bs.tab', function (e) {
+                updateWithFilter();
+            } )
+            
+            //Close Last Collapse
+            $('.panel-title').click( function(e) {
+                $('.collapse.in').collapse( 'hide' );
+            } );
+            
+            $('#job div[role="tabpanel"]').on('shown.bs.collapse', function (e) {
+                var id = $(e.target).attr( 'id' );
+                $('a[href="#' + id + '"]').children('span').removeClass('glyphicon-collapse-down').addClass('glyphicon-collapse-up');
+            })
+            .on('hidden.bs.collapse', function (e) {
+                var id = $(e.target).attr( 'id' );
+                $('a[href="#' + id + '"]').children('span').removeClass('glyphicon-collapse-up').addClass('glyphicon-collapse-down');
+            })
+            
+            $('#commit').on('show.bs.modal', function (e) {
+                var id = $(e.relatedTarget).parents( '.list-group-item' ).find( '[role="tabpanel"]' ).attr( 'id' );
+                $('#jobID').val( id );
+            })
+            
+            $('a[href="#msg"]').on('shown.bs.tab', function (e) {
+                $(e.target).find('.badge').hide();
+            })
+            
+            $('blockquote.bg-warning').click( function (e) {
+                $(this).removeClass('bg-warning');
+            } )
+            
+            $('#password form').submit(function(e) {
+                var p1 = $('#passwd1').val();
+                var p2 = $('#passwd2').val();
+                if ( p1 == p2 ) {
+                    $('#passwd1').parents('.form-group').removeClass('has-error');
+                    $('#passwd2').parents('.form-group').removeClass('has-error');
+                    if ( p1.length < 8 ) {
+                        $('#errorMsg').text('新密码小于8位');
+                        return false;
+                    }
+                } else {
+                    $('#passwd1').parents('.form-group').addClass('has-error');
+                    $('#passwd2').parents('.form-group').addClass('has-error');
+                    $('#errorMsg').text('两次密码不一致');
+                    return false;
+                }
+            })
+
+        </script>
+    </body>
+</html>

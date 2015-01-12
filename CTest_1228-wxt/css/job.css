@@ -1,0 +1,78 @@
+@charset "utf-8";
+body {
+    padding: 15px 0;
+}
+#job div pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#code .tab-content {
+    padding: 0;
+}
+
+#code .tab-pane {
+    height: 500px;
+    margin: 0;
+}
+
+#src {
+    background: black;
+}
+
+#linenumber {
+    height: 100%;
+    display: inline-block;
+    min-width: 30px;
+    width: 5%;
+    resize: none;
+    overflow: hidden;
+    border: none;
+    float: left;
+    background: inherit;
+    padding-right: 7px;
+    padding-top: 4px;
+    font-size: 14px;
+    text-shadow: -1px -1px 0px #000;
+    background: #383838;
+    color: #B0B0B0;
+    text-align: right;
+    font-family: Courier, Times New Roman;
+}
+
+#srccontent {
+    height: 100%;
+    display: inline-block;
+    width: 94%;
+}
+
+#srccontent textarea {
+    width: 100%;
+    resize: none;
+}
+
+.wysibb-toolbar {
+    display: none;
+}
+
+.wysibb {
+    height: 100%;
+    border-width: 0 0 0 0px;
+    background: inherit;
+}
+
+.wysibb-text {
+    height: 100%;
+}
+
+.wysibb-text-editor {
+    height: 100%;
+    font-size: 14px;
+    color: #F0F0F0;
+    font-family: Courier, Times New Roman;
+    letter-spacing: 1px;
+}
+
+.bottom-resize-line {
+    display: none;
+}
