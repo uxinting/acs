@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="52framework/css/general.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="52framework/css/grid.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="52framework/css/forms.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="dist/css/bootstrap-dropdown.min.css"/>
         <style>
             section {
                 padding: 20px 0;
@@ -75,9 +76,24 @@
                 margin: 15px 5px;
             }
             
+            .row, .col {
+                overflow: visible;
+            }
+            
+            
             footer {
                 padding-top: 20px;
                 border-top: solid rgb( 32, 32, 32 ) 2px;
+            }
+            .dropdown {
+                padding-bottom: 0;
+            }
+            .dropdown-menu {
+                margin-top: 0;
+                padding-top: 2px;
+            }
+            * {
+                box-sizing: inherit;
             }
         </style>
     </head>
@@ -96,11 +112,6 @@
                 <div class="row">
                     <form class="col col_6">
                         <fieldset class="s_column">
-                            <div id="type">
-                                <input type="radio" checked="true" name="type" value="student"/> 学生
-                                <input type="radio" name="type" value="teacher"/> 教师
-                                <input type="radio" name="type" value="admin"/> 管理员
-                            </div>
                             <div>
                                 <label>用户名</label>
                                 <input type="text" name="userName" required="required" class="box_shadow"/>
@@ -109,7 +120,16 @@
                                 <label>密码</label>
                                 <input type="password" name="password" required="required" class="box_shadow"/>
                             </div>
-                            <input type="submit" value="登录 &rarr;" />
+                            <div class="dropdown">
+                                <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="登录 &rarr;" clickable="false">
+                                    登录 &rarr;
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <li><a href="#">学生</a></li>
+                                    <li><a href="#">教师</a></li>
+                                    <li><a href="#">管理员</a></li>
+                                </ul>
+                            </div>
                         </fieldset>
                     </form>
                 </div>
@@ -121,5 +141,20 @@
             <div class="col_8 col"> &copy;2006-2014 华中科技大学C语言作业提交&nbsp;湖北省武汉市洪山区珞喻路1037号</div>
             <div class="col_8 col">邮政编码：430074 电话：027-87540101  信箱：hubsupport@mail.hust.edu.cn</div>
         </footer>
+        
+        <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+        <script src="dist/js/bootstrap-dropdown.min.js"></script>
+        <script>
+            $(function(){
+                $('.dropdown').hover(function(e){
+                    var e = $('.dropdown-menu');
+                    if ( e.is(':hidden') ) {
+                        e.show();
+                    } else {
+                        e.hide();
+                    }
+                });
+            })
+        </script>
     </body>
 </html>

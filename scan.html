@@ -14,11 +14,38 @@
                 background: #FEFEFF;
             }
             
+            .glyphicon {
+                position: relative;
+                font-size: 12px;
+                float: right;
+                top: 5px;
+            }
+            .glyphicon:hover {
+                cursor: pointer;
+                color: #abe;
+            }
+            
+            .statics {
+                position: fixed;
+                display: block;
+                right: 100px;
+                bottom: 50px;
+                width: 200px;
+                height: auto;
+                box-shadow: 0 0 1px rgba(88, 88, 88, 0.7);
+            }
+            
+            .statics table {
+                margin-bottom: 0;
+            }
+            
             .page-header:hover {
                 cursor: pointer;
                 color: #2A6496;
-                //color: white;
-                text-shadow: 1px 0 0 blue;
+            }
+            
+            .page-header em {
+                font-size: 14px;
             }
             
             .popover {
@@ -42,22 +69,64 @@
         </style>
     </head>
     <body>
+        <div class="statics">
+            <table class="table table-bordered">
+                <tr>
+                    <td class="success">90~100(优)</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td class="info">80~89(良)</td>
+                    <td>28</td>
+                </tr>
+                <tr>
+                    <td class="info">70~79(中)</td>
+                    <td>19</td>
+                </tr>
+                <tr>
+                    <td class="info">60~69(及格)</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td class="danger">59分以下(不及格)</td>
+                    <td>0</td>
+                </tr>
+            </table>
+        </div>
         <div class="container">
-            <div class="col-md-6 col-md-offset-3">
+            <div class="col-md-7 col-md-offset-2">
                 <div class="page-header">
-                    <h3> J0001111 <small> C1-1 </small></h3>
+                    <h3> 普通骑士 <small> 计算机1-1 <em>概览</em> </small></h3>
                 </div>
-                <table class="table table-striped">
+                <table id="statics-lines" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>学号</th>
+                            <th>学号<span class="glyphicon glyphicon-sort-by-order" aria-hidden="true" data-sort="sno"></span></th>
                             <th>姓名</th>
                             <th>状态</th>
-                            <th>分数</th>
+                            <th>分数<span class="glyphicon glyphicon-sort-by-order" aria-hidden="true" data-sort="score"></span></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="success">
+                        <tr>
+                            <td>M20121111</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
                             <td>M20128888</td>
                             <td>吴新庭</td>
                             <td>已完成</td>
@@ -81,7 +150,51 @@
                             <td>已完成</td>
                             <td>100</td>
                         </tr>
-                        <tr class="danger">
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>M20128888</td>
+                            <td>吴新庭</td>
+                            <td>已完成</td>
+                            <td>100</td>
+                        </tr>
+<!--
+                        <tr>
+                            <td>----</td>
+                            <td>----</td>
+                            <td>----</td>
+                            <td>----</td>
+                        </tr>
+-->
+                        <tr>
                             <td>M20128888</td>
                             <td>吴新庭</td>
                             <td>未完成</td>
@@ -167,6 +280,30 @@
                             <p><pre>8</pre></p>\
                         </div>\
                     </div>'
+            });
+            $('.glyphicon').click(function(e){
+                var sort = $(e.target).data('sort');
+                var items = $('#statics-lines tbody tr');
+                if ( sort == 'score' ) {
+                    items.sort(function(a, b){
+                        var ascore = $(a).find('td:last');
+                        var bscore = $(b).find('td:last');
+                        return parseInt(ascore.text()) - parseInt(bscore.text());
+                    });
+                } else if ( sort == 'sno' ) {
+                    items.sort(function(a, b){
+                        var asno = $(a).find('td:first');
+                        var bsno = $(b).find('td:first');
+                        return asno.text() < bsno.text() ? -1 : 1;
+                    });
+                } else {}
+                $('#statics-lines tbody tr').remove();
+                if ( $(e.target).hasClass('glyphicon-sort-by-order') ) {
+                    items.appendTo($('#statics-lines tbody'));
+                } else {
+                    items.each(function(n, e){$(e).prependTo($('#statics-lines tbody'))});
+                }
+                $(e.target).toggleClass('glyphicon-sort-by-order-alt glyphicon-sort-by-order');
             });
         </script>
     </body>

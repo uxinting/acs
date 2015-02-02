@@ -7,6 +7,7 @@
         <title>Teacher</title>
         
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
         <!--<link href="SCEditor/css/default.min.css" rel="stylesheet" type="text/css" media="all">-->
         <style>
             body {
@@ -92,6 +93,10 @@
             #job nav a {
                 float: none;
                 //margin-left: -3px;
+            }
+            
+            .datetimepicker {
+                position: absolute;
             }
             
             #tools > .btn-group {
@@ -648,6 +653,8 @@
         <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
         <script src="js/jquery.cookie.js"></script>
+        <script src="datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
         <!--<script src="SCEditor/js/jquery.sceditor.xhtml.min.js"></script>-->
         <script>
             //Retrive Panel Status
@@ -839,6 +846,8 @@
                     return false;
                 }
             })
+            
+            $('#newjob input').datetimepicker();
 
         </script>
     </body>
